@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
+import utiles.Constants;
 
 @RunWith(SerenityRunner.class)
 public class LoginTest {
@@ -19,38 +20,39 @@ public class LoginTest {
     LoginSteps loginSteps;
 
     @Before
-    public void maximiseWindow(){
+    public void maximiseWindow() {
         driver.manage().window().maximize();
     }
 
     @Test
-    public void loginWithValidCredentials(){
+    public void loginWithValidCredentials() {
         loginSteps.navigateToHomepage();
         loginSteps.goToLoginPage();
-        loginSteps.loginUser("admin","parola11");
+        loginSteps.loginUser(Constants.USER_NAME,Constants.USER_PASSWORD);
         loginSteps.checkUserIsLoggedIn();
     }
 
     @Test
-    public void loginWithInvalidPassword(){
+    public void loginWithInvalidPassword() {
         loginSteps.navigateToHomepage();
         loginSteps.goToLoginPage();
-        loginSteps.loginUser("admin","parola11");
+        loginSteps.loginUser("admin", "pasrola11");
         loginSteps.checkUserNotLoggedIn();
     }
 
     @Test
-    public void loginWithIncorrectEmail(){
+    public void loginWithIncorrectEmail() {
         loginSteps.navigateToHomepage();
         loginSteps.goToLoginPage();
-        loginSteps.loginUser("admin","parola11");
+        loginSteps.loginUser("admin@.com", "passrola11");
         loginSteps.checkUserNotLoggedIn();
     }
+
     @Test
-    public void loginWithInvalidEmail(){
+    public void loginWithInvalidEmail() {
         loginSteps.navigateToHomepage();
         loginSteps.goToLoginPage();
-        loginSteps.loginUser("admin","parola11");
+        loginSteps.loginUser("asaasa","1234556");
         loginSteps.userStillOnLoginPage();
     }
 

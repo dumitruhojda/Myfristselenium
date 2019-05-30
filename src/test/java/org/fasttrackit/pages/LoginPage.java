@@ -5,40 +5,43 @@ import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.pages.PageObject;
 
+import static utiles.Constants.USER_NAME;
+
 @DefaultUrl("http://qa4.fasttrackit.org:8008/")
 public class LoginPage extends PageObject {
 
 
-    @FindBy(id = "email")
-    private WebElementFacade emailField;
+    @FindBy(id = "username")
+    private WebElementFacade usernameField;
 
-    @FindBy(id = "pass")
+    @FindBy(id = "password")
     private WebElementFacade passField;
 
-    @FindBy(id = "send2")
+    @FindBy(name = "login")
     private WebElementFacade loginButton;
 
-    @FindBy(css = "li.error-msg span")
+    @FindBy(xpath = "//*[@id=\"post-120\"]/div/div/ul/li")
     private WebElementFacade errorMessage;
 
-    public void setEmailField(String email){
-        typeInto(emailField, email);
+
+    public void setEmailField(String username) {
+        typeInto(usernameField, username);
     }
 
-    public void setPassField(String pass){
-        typeInto(passField, pass);
+    public void setPassField(String password) {
+        typeInto(passField, password);
     }
 
-    public void clickLoginButton(){
+    public void clickLoginButton() {
         clickOn(loginButton);
     }
 
 
-    public void checkErrorMessage(){
-        errorMessage.shouldContainText("Invalid login or password.");
+    public void checkErrorMessage() {
+        errorMessage.shouldContainText("ERROR");
     }
 
-    public void checkUserIsOnLoginPage(){
+    public void checkUserIsOnLoginPage() {
         loginButton.shouldBeVisible();
     }
 }

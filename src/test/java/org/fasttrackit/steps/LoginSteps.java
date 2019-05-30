@@ -1,17 +1,20 @@
 package org.fasttrackit.steps;
 
 import net.thucydides.core.annotations.Step;
-import org.fasttrackit.pages.Homepage;
+
+import org.fasttrackit.pages.HomePage;
 import org.fasttrackit.pages.LoginPage;
 import org.fasttrackit.pages.MyAccountPage;
+import utiles.Constants;
 
 import java.sql.Driver;
 
 public class LoginSteps {
 
-    Homepage homepage;
+    HomePage homepage;
     LoginPage loginPage;
     MyAccountPage myAccountPage;
+    private String username;
 
     @Step
     public void navigateToHomepage(){
@@ -22,19 +25,19 @@ public class LoginSteps {
     @Step
     public void goToLoginPage(){
         homepage.clickMyAccount();
-        homepage.clickLoginLink();
+
     }
 
     @Step
-    public void loginUser(String email, String password){
-        loginPage.setEmailField(email);
+    public void loginUser(String username, String password){
+        loginPage.setEmailField(username);
         loginPage.setPassField(password);
         loginPage.clickLoginButton();
     }
 
     @Step
     public void checkUserIsLoggedIn(){
-        myAccountPage.checkLoggedIn("");
+        myAccountPage.checkLoggedIn(Constants.USER_NAME);
     }
 
     @Step
@@ -48,3 +51,4 @@ public class LoginSteps {
     }
 
 }
+
