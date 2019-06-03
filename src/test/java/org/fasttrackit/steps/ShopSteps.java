@@ -1,12 +1,14 @@
 package org.fasttrackit.steps;
 
-import jxl.biff.Type;
-import net.thucydides.core.annotations.Step;
-import org.fasttrackit.pages.*;
+import org.fasttrackit.pages.CartPage;
 import org.fasttrackit.pages.HomePage;
+import org.fasttrackit.pages.LoginPage;
+import org.fasttrackit.pages.ShopPage;
+
+import net.thucydides.core.annotations.Step;
 import utiles.Constants;
 
-public class ShopStep {
+public class ShopSteps {
 
     ShopPage shopPage;
     CartPage cartPage;
@@ -37,9 +39,9 @@ public class ShopStep {
     }
 
     @Step
-    public void checkCartAdd(){
+    public boolean checkCartAdd(){
         String addedProductName = shopPage.getAddedProductName();
-        cartPage.checkCartAdd(addedProductName);
+        return cartPage.checkCartAdd(addedProductName);
     }
 
     @Step
@@ -48,7 +50,7 @@ public class ShopStep {
     }
 
     @Step
-    public void checkCartRemove() {
-        cartPage.checkCartRemove();
+    public boolean checkCartRemove() {
+        return cartPage.checkCartRemove();
     }
 }

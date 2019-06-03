@@ -1,22 +1,26 @@
 package org.fasttrackit.steps;
 
-import net.thucydides.core.annotations.Step;
 import org.fasttrackit.pages.CartPage;
-import org.fasttrackit.pages.HomePage;
-import org.fasttrackit.pages.LoginPage;
-import org.fasttrackit.pages.MyAccountPage;
-import utiles.Constants;
 
-public class CartSteps{
+import net.thucydides.core.annotations.Step;
 
-    CartPage cartPage;
-    private String username;
+public class CartSteps {
 
-    @Step
-    public void navigateToCartPage(){
-        cartPage.open();
-    }
+	CartPage cartPage;
 
-
-
+	@Step
+	public void navigateToCartPage() {
+		cartPage.open();
+	}
+	
+	@Step
+	public void updateCart() {
+		cartPage.setProductQuantityField();
+		cartPage.clickUpdateCartButton();
+	}
+	
+	@Step
+	public boolean checkCartUpdate() {
+		return cartPage.checkCartUpdate();
+	}
 }

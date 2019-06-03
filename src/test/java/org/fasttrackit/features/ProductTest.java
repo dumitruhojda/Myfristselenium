@@ -1,6 +1,6 @@
 package org.fasttrackit.features;
 
-import org.fasttrackit.steps.ShopSteps;
+import org.fasttrackit.steps.ProductSteps;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -14,17 +14,17 @@ import net.thucydides.core.annotations.Steps;
 
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ShopTest {
+public class ProductTest {
 
 	@Managed(uniqueSession = true)
 	private WebDriver driver;
 
 	@Steps
-	ShopSteps shopSteps;
+	ProductSteps productSteps;
 
 	@Before
 	public void initEnvironment() {
-		shopSteps.initEnvironment();
+		productSteps.initEnvironment();
 	}
 
 	@Before
@@ -33,17 +33,11 @@ public class ShopTest {
 	}
 
 	@Test
-	public void addToBasketTest() {
-		shopSteps.navigateToShop();
-		shopSteps.addBasket();
-		shopSteps.navigateToCartPage();
-		assert (shopSteps.checkCartAdd());
-	}
-
-	@Test
-	public void removeFromBasket() {
-		shopSteps.navigateToCartPage();
-		shopSteps.removeBascket();
-		assert (shopSteps.checkCartRemove());
+	public void addProductToCartTest() {
+		productSteps.navigateToShopPage();
+		productSteps.goToProductPage();
+		productSteps.addProductsToCart();
+		productSteps.navigateToCartPage();
+		assert (productSteps.checkCartAddQuantiy());
 	}
 }

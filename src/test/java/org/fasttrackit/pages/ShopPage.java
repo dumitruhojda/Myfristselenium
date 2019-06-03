@@ -12,10 +12,13 @@ public class ShopPage extends PageObject {
 
     @FindBy(css="a[href='/?post_type=product&add-to-cart=48']")
     private WebElementFacade productLink;
+    
+	@FindBy(css = "a[href='http://qa4.fasttrackit.org:8008/?product=beanie']")
+    private WebElementFacade productPageLink;
 
     @FindBy(css=".cart-item-number")
     private WebElementFacade cartNumber;
-
+    
     @FindBy(css="fa fa-shopping-cart")
     public WebElementFacade cartButton;
 
@@ -26,5 +29,9 @@ public class ShopPage extends PageObject {
 
     public String getAddedProductName() {
         return addedProductName;
+    }
+    
+    public void clickProductPageLink() {
+    	clickOn(productPageLink);
     }
 }
