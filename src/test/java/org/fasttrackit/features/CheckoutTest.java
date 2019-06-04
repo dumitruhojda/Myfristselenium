@@ -5,6 +5,7 @@ import org.fasttrackit.steps.CheckoutSteps;
 import org.fasttrackit.steps.LoginSteps;
 import org.fasttrackit.steps.ProductSteps;
 import org.fasttrackit.steps.ShopSteps;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -21,56 +22,65 @@ import utiles.Constants;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CheckoutTest {
 
-	@Managed(uniqueSession = true)
-	private WebDriver driver;
+    @Managed(uniqueSession = true)
+    private WebDriver driver;
 
-	@Steps
-	LoginSteps loginSteps;
+    @Steps
+    LoginSteps loginSteps;
 
-	@Steps
-	ShopSteps shopSteps;
+    @Steps
+    ShopSteps shopSteps;
 
-	@Steps
-	ProductSteps productSteps;
+    @Steps
+    ProductSteps productSteps;
 
-	@Steps
-	CartSteps cartSteps;
+    @Steps
+    CartSteps cartSteps;
 
-	@Steps
-	CheckoutSteps checkoutSteps;
+    @Steps
+    CheckoutSteps checkoutSteps;
 
-	@Before
-	public void initEnvironment() {
-		loginSteps.navigateToHomepage();
-		loginSteps.goToLoginPage();
-		loginSteps.loginUser(Constants.USER_NAME, Constants.USER_PASSWORD);
+    @Before
+    public void initEnvironment() {
+        loginSteps.navigateToHomepage();
+        loginSteps.goToLoginPage();
+        loginSteps.loginUser(Constants.USER_NAME, Constants.USER_PASSWORD);
 
-		productSteps.navigateToShopPage();
-		productSteps.goToProductPage();
-		productSteps.addProductsToCart();
+        productSteps.navigateToShopPage();
+        productSteps.goToProductPage();
+        productSteps.addProductsToCart();
 
-		checkoutSteps.navigateToCheckoutPage();
-	}
+        checkoutSteps.navigateToCheckoutPage();
+    }
 
-	@Before
-	public void maximiseWindow() {
-		driver.manage().window().maximize();
-	}
-
-
-	@Test
-	public void checkoutValidInformation() {
-		checkoutSteps.populateCheckoutFormCorrect();
-		checkoutSteps.placeOrder();
-		assert (checkoutSteps.checkValidInformation());
-	}
+    @Before
+    public void maximiseWindow() {
+        driver.manage().window().maximize();
+    }
 
 
 
-	@Test
-	public void checkoutInvalidInformation() {
-		checkoutSteps.populateCheckoutFormIncorrect();
-		checkoutSteps.placeOrder();
-		assert (checkoutSteps.checkInvalidInformation());
-	}
+
+    @Test
+    public void checkoutValidInformation() {
+
+        checkoutSteps.populateCheckoutFormCorrect();
+        checkoutSteps.placeOrder();
+        assert (checkoutSteps.checkValidInformation());
+    }
+
+
+
+    @Test
+    public void checkoutInvalidInformation() {
+        checkoutSteps.populateCheckoutFormIncorrect();
+        checkoutSteps.placeOrder();
+        assert (checkoutSteps.checkInvalidInformation());
+    }
+    @After
+    public void removeFromBasket() {
+        shopSteps.navigateToCartPage();
+        shopSteps.removeBascket();
+    }
 }
+

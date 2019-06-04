@@ -1,9 +1,11 @@
 package org.fasttrackit.features;
 
+import net.thucydides.core.annotations.Step;
 import org.fasttrackit.steps.CartSteps;
 import org.fasttrackit.steps.LoginSteps;
 import org.fasttrackit.steps.ProductSteps;
 import org.fasttrackit.steps.ShopSteps;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -53,9 +55,18 @@ public class CartTest {
 		driver.manage().window().maximize();
 	}
 
+
 	@Test
 	public void updateCart() {
 		cartSteps.updateCart();
 		assert (cartSteps.checkCartUpdate());
 	}
+	@After
+	public void removeFromBasket() {
+		shopSteps.navigateToCartPage();
+		shopSteps.removeBascket();
+	}
+
+
+
 }
