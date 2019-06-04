@@ -57,14 +57,14 @@ public class CheckoutTest {
 		driver.manage().window().maximize();
 	}
 
-	/*
+
 	@Test
 	public void checkoutValidInformation() {
 		checkoutSteps.populateCheckoutFormCorrect();
 		checkoutSteps.placeOrder();
 		assert (checkoutSteps.checkValidInformation());
 	}
-	*/
+
 
 
 	@Test
